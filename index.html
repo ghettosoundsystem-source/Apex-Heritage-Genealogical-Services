@@ -1,1 +1,606 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Heritage Genealogical Services | Cambridge &amp; European Lineage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --linen: #f3efe6;
+      --card-ivory: #fbf9f4;
+      --forest: #1b3d2b;
+      --forest-light: #2b5940;
+      --bronze: #9e723b;
+      --bronze-soft: #c49a60;
+      --text-dark: #19261f;
+      --text-muted: #4b5c52;
+      --border-line: rgba(27, 61, 43, 0.16);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "EB Garamond", Georgia, serif;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(158, 114, 59, 0.12), transparent 50%),
+        var(--linen);
+      color: var(--text-dark);
+      min-height: 100vh;
+      line-height: 1.68;
+      font-size: 18px;
+    }
+
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      background: var(--card-ivory);
+      border-bottom: 2px solid var(--bronze);
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      box-shadow: 0 6px 24px rgba(27, 61, 43, 0.06);
+    }
+
+    .nav-bar {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-mini { display: flex; align-items: center; gap: 12px; }
+    .brand-mini img {
+      height: 46px;
+      width: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-line);
+    }
+
+    .brand-title {
+      font-family: "Cinzel", serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--forest);
+      letter-spacing: 0.08em;
+      display: block;
+    }
+
+    .brand-sub {
+      font-family: "Inter", sans-serif;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--bronze);
+      font-weight: 700;
+    }
+
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+    .tab-btn {
+      font-family: "Inter", sans-serif;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+
+    .tab-btn:hover { color: var(--forest); }
+    .tab-btn.active { background: var(--forest); color: #ffffff; }
+
+    .owner-btn {
+      font-family: "Inter", sans-serif;
+      padding: 7px 13px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      border: 1px solid var(--bronze);
+      background: rgba(158, 114, 59, 0.12);
+      color: var(--forest);
+    }
+
+    .owner-btn.unlocked { background: var(--forest); color: #ffffff; border-color: var(--forest); }
+
+    .page { display: none; animation: crestFade 0.28s ease; }
+    .page.active { display: block; }
+
+    @keyframes crestFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero with Emblem */
+    .hero {
+      padding: 54px 0 46px;
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .hero-split {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 38px;
+      align-items: center;
+    }
+
+    .emblem-frame {
+      background: #f5f2eb;
+      border: 2px solid var(--bronze);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 16px 36px rgba(27, 61, 43, 0.1);
+      text-align: center;
+    }
+
+    .emblem-frame img {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .kicker {
+      font-family: "Inter", sans-serif;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--bronze);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: "Cinzel", serif;
+      font-size: clamp(1.9rem, 4vw, 2.95rem);
+      line-height: 1.18;
+      color: var(--forest);
+      margin-bottom: 16px;
+    }
+
+    .hero p { color: var(--text-muted); margin-bottom: 24px; font-size: 1.12rem; }
+
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .btn-forest {
+      font-family: "Inter", sans-serif;
+      background: var(--forest);
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-bronze {
+      font-family: "Inter", sans-serif;
+      background: transparent;
+      color: var(--forest);
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1.5px solid var(--bronze);
+      cursor: pointer;
+    }
+
+    /* Sections */
+    .section { padding: 50px 0; }
+    .sec-title { font-family: "Cinzel", serif; font-size: clamp(1.55rem, 3vw, 2.15rem); color: var(--forest); margin-bottom: 8px; }
+    .sec-lead { color: var(--text-muted); max-width: 680px; margin-bottom: 28px; }
+
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 22px; }
+
+    .heritage-card {
+      background: var(--card-ivory);
+      border: 1px solid var(--border-line);
+      border-top: 4px solid var(--forest);
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(27, 61, 43, 0.05);
+    }
+
+    .era-tag {
+      font-family: "Inter", sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--bronze);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .heritage-card h3 { font-family: "Cinzel", serif; font-size: 1.15rem; color: var(--forest); margin-bottom: 8px; }
+    .heritage-card p { color: var(--text-muted); font-size: 1rem; }
+
+    /* Owner Editor */
+    .owner-bar {
+      background: #e9e2d3;
+      border: 1px solid var(--bronze);
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-family: "Inter", sans-serif;
+      font-size: 0.84rem;
+    }
+
+    .owner-panel {
+      display: none;
+      background: var(--card-ivory);
+      border: 1.5px dashed var(--bronze);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 26px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      align-items: end;
+    }
+
+    .owner-panel.visible { display: grid; }
+
+    .field label {
+      font-family: "Inter", sans-serif;
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--forest);
+      margin-bottom: 6px;
+    }
+
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-line);
+      background: #ffffff;
+      color: var(--text-dark);
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 22px; }
+    .archive-card { background: var(--card-ivory); border: 1px solid var(--border-line); border-radius: 10px; overflow: hidden; }
+    .archive-img { height: 210px; background: #e8e1d1; display: grid; place-items: center; overflow: hidden; }
+    .archive-img img { width: 100%; height: 100%; object-fit: cover; }
+    .archive-body { padding: 18px; }
+    .archive-body h3 { font-family: "Cinzel", serif; font-size: 1.05rem; color: var(--forest); margin-bottom: 6px; }
+
+    .btn-del {
+      display: none;
+      margin-top: 10px;
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #f87171;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: "Inter", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-del.visible { display: inline-block; }
+
+    .split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 26px; }
+    .panel { background: var(--card-ivory); border: 1px solid var(--border-line); border-radius: 10px; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+
+    footer { background: var(--forest); color: #e6ece8; text-align: center; padding: 28px 20px; font-family: "Inter", sans-serif; font-size: 0.8rem; margin-top: 40px; border-top: 3px solid var(--bronze); }
+
+    @media (max-width: 820px) {
+      .hero-split, .split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-bar">
+      <div class="brand-mini">
+        <img id="navLogoImg" src="1000035177.png" alt="Apex Heritage Emblem" onerror="this.style.display='none'" />
+        <div>
+          <span class="brand-title">Apex Heritage</span>
+          <span class="brand-sub">Genealogical Services &bull; Cambridge</span>
+        </div>
+      </div>
+      <nav class="nav-tabs">
+        <button class="tab-btn active" data-page="home">Overview</button>
+        <button class="tab-btn" data-page="services">Research Tiers</button>
+        <button class="tab-btn" data-page="archives">Archives &amp; Crests</button>
+        <button class="tab-btn" data-page="contact">Commission</button>
+        <button class="owner-btn" id="ownerBtn" onclick="toggleOwner()">Owner Lock</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div id="page-home" class="page active">
+      <section class="hero">
+        <div class="container hero-split">
+          <div class="emblem-frame">
+            <img id="heroLogoImg" src="1000035177.png" alt="Apex Heritage Genealogical Services Logo" />
+          </div>
+
+          <div>
+            <span class="kicker">Cambridge, England &bull; British &amp; Continental Ancestry</span>
+            <h1>Tracing Your Roots Across Centuries, Parishes &amp; Borders.</h1>
+            <p>
+              Led by genealogical researcher and author Darryll Lee Robert Grass, Apex Heritage Genealogical Services uncovers verified family trees, parish registers, military service records, and French Huguenot lineage from the 16th century to the present day.
+            </p>
+            <div class="btn-row">
+              <button class="btn-forest" onclick="goPage('contact')">Commission Family Research</button>
+              <button class="btn-bronze" onclick="goPage('services')">View Research Packages</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="sec-title">Archival Disciplines</h2>
+          <p class="sec-lead">Meticulous primary-source verification across UK and European repositories.</p>
+          <div class="cards-grid">
+            <article class="heritage-card">
+              <span class="era-tag">1837 – Present</span>
+              <h3>Civil Registration &amp; Census Trees</h3>
+              <p>Complete GRO birth, marriage, and death verification paired with 1841–1921 census mapping across England and Wales.</p>
+            </article>
+            <article class="heritage-card">
+              <span class="era-tag">1538 – 1837</span>
+              <h3>Parish Registers &amp; Estate Rolls</h3>
+              <p>Deep archival tracing through Cambridgeshire, East Anglian, and British parish baptisms, wills, and land records.</p>
+            </article>
+            <article class="heritage-card">
+              <span class="era-tag">1591 – 1750</span>
+              <h3>Huguenot &amp; French Archives</h3>
+              <p>Cross-channel migration tracing through French departmental archives, Gallica, Geneanet, and Filae collections.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="page-services" class="page">
+      <section class="section">
+        <div class="container">
+          <span class="kicker">Bespoke Commissions</span>
+          <h2 class="sec-title">Genealogical Research Packages</h2>
+          <p class="sec-lead">Tailored family history dossiers prepared with full source citations.</p>
+          <div class="cards-grid">
+            <article class="heritage-card">
+              <span class="era-tag">Foundation Dossier</span>
+              <h3>Four-Generation Lineage</h3>
+              <p>Verified direct ancestral lines back to your great-great-grandparents with documented birth, marriage, and census citations.</p>
+            </article>
+            <article class="heritage-card">
+              <span class="era-tag">Deep Archive Chronicle</span>
+              <h3>Multi-Century Family Monograph</h3>
+              <p>Narrative family history tracing surname origins, occupations, parish migrations, and historical context into the 1600s and 1700s.</p>
+            </article>
+            <article class="heritage-card">
+              <span class="era-tag">Specialist Focus</span>
+              <h3>Military, Maritime &amp; Brick-Wall Research</h3>
+              <p>Targeted investigation into Merchant Navy records, World War service files, and elusive ancestral dead-ends.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="page-archives" class="page">
+      <section class="section">
+        <div class="container">
+          <span class="kicker">Documents &amp; Heraldry</span>
+          <h2 class="sec-title">Heritage Archives &amp; Gallery</h2>
+          <p class="sec-lead">Crests, historical documents, and ancestral records.</p>
+
+          <div class="owner-bar">
+            <span id="ownerStatus">Visitor Mode — unlock with Owner Password to upload documents or update the crest.</span>
+            <button class="owner-btn" onclick="toggleOwner()">Owner Edit Access</button>
+          </div>
+
+          <div class="owner-panel" id="heritageEditor">
+            <div class="field">
+              <label for="hTitle">Record / Title</label>
+              <input type="text" id="hTitle" placeholder="e.g. 1685 Huguenot Parish Extract" />
+            </div>
+            <div class="field">
+              <label for="hDesc">Historical Note</label>
+              <input type="text" id="hDesc" placeholder="Details..." />
+            </div>
+            <div class="field">
+              <label for="hFile">Upload Image</label>
+              <input type="file" id="hFile" accept="image/*" />
+            </div>
+            <div>
+              <button class="btn-forest" style="width:100%;" onclick="addArchiveItem()">+ Add to Archive</button>
+            </div>
+          </div>
+
+          <div class="archive-grid" id="heritageGrid"></div>
+        </div>
+      </section>
+    </div>
+
+    <div id="page-contact" class="page">
+      <section class="section">
+        <div class="container">
+          <span class="kicker">Begin Your Research</span>
+          <h2 class="sec-title">Commission Apex Heritage</h2>
+          <p class="sec-lead">Share what you know about your family tree and what you hope to uncover.</p>
+
+          <div class="split">
+            <form class="panel" onsubmit="sendHeritageEmail(event)">
+              <div class="field">
+                <label for="gName">Your Name</label>
+                <input type="text" id="gName" required placeholder="Full name" />
+              </div>
+              <div class="field">
+                <label for="gSurnames">Surnames &amp; Regions of Interest</label>
+                <input type="text" id="gSurnames" required placeholder="e.g. Grass / Chapman — Cambridgeshire & France" />
+              </div>
+              <div class="field">
+                <label for="gNotes">Known Family Details</label>
+                <textarea id="gNotes" rows="4" required placeholder="Share earliest known dates, towns, or questions..."></textarea>
+              </div>
+              <button type="submit" class="btn-forest">Request Research Consultation</button>
+            </form>
+
+            <div class="panel">
+              <h3 style="font-family: 'Cinzel', serif; color: var(--forest);">Cambridge Desk</h3>
+              <p><strong>Email:</strong> <a href="mailto:cbdenterprises2026@gmail.com" style="color: var(--bronze); font-weight: 700;">cbdenterprises2026@gmail.com</a></p>
+              <p><strong>Telephone:</strong> <a href="tel:01223650566" style="color: var(--forest); font-weight: 700;">(01223) 650566</a></p>
+              <p><strong>Location:</strong> Cambridge, Cambridgeshire, England</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Apex Heritage Genealogical Services &bull; A Division of CBD Enterprises UK &bull; (01223) 650566</p>
+  </footer>
+
+  <script>
+    const OWNER_PASS = "gras2026";
+    let isOwner = sessionStorage.getItem("apex_her_owner") === "true";
+
+    function goPage(id) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.page === id));
+      document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === "page-" + id));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(b => b.addEventListener("click", () => goPage(b.dataset.page)));
+
+    function syncOwner() {
+      document.getElementById("heritageEditor").classList.toggle("visible", isOwner);
+      document.getElementById("ownerStatus").textContent = isOwner
+        ? "Owner Edit Mode Active — you can add or remove archival records."
+        : "Visitor Mode — unlock with Owner Password to upload documents or update the crest.";
+      const btn = document.getElementById("ownerBtn");
+      btn.textContent = isOwner ? "Owner Unlocked" : "Owner Lock";
+      btn.classList.toggle("unlocked", isOwner);
+      document.querySelectorAll(".btn-del").forEach(d => d.classList.toggle("visible", isOwner));
+    }
+
+    function toggleOwner() {
+      if (isOwner) {
+        isOwner = false;
+        sessionStorage.removeItem("apex_her_owner");
+        syncOwner();
+        return;
+      }
+      const pwd = prompt("Enter Apex Heritage Owner Password:");
+      if (pwd === OWNER_PASS) {
+        isOwner = true;
+        sessionStorage.setItem("apex_her_owner", "true");
+        syncOwner();
+      } else if (pwd !== null) {
+        alert("Incorrect password.");
+      }
+    }
+
+    const defaultArchives = [
+      { id: "h1", title: "Apex Heritage DNA & Lineage Crest", desc: "Tracing verified family roots from 1591 through modern generations.", img: "1000035177.png" },
+      { id: "h2", title: "Cambridgeshire & Fenland Parish Rolls", desc: "Primary-source baptism, marriage, and estate records across East Anglia.", img: "" }
+    ];
+
+    let savedArchives = JSON.parse(localStorage.getItem("apex_her_items_v1") || "[]");
+
+    function renderArchives() {
+      const list = [...savedArchives, ...defaultArchives];
+      document.getElementById("heritageGrid").innerHTML = list.map(item => `
+        <article class="archive-card">
+          <div class="archive-img">
+            ${item.img
+              ? `<img src="${item.img}" alt="${item.title}" onerror="this.parentElement.innerHTML='<span style=\\'font-family:Cinzel,serif;color:#1b3d2b;\\'>APEX HERITAGE ARCHIVE</span>'" />`
+              : `<span style="font-family:'Cinzel',serif; color:#1b3d2b;">APEX HERITAGE ARCHIVE</span>`
+            }
+          </div>
+          <div class="archive-body">
+            <h3>${item.title}</h3>
+            <p>${item.desc}</p>
+            ${item.custom ? `<button class="btn-del ${isOwner ? "visible" : ""}" onclick="deleteArchive('${item.id}')">Remove</button>` : ""}
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function addArchiveItem() {
+      if (!isOwner) return;
+      const title = document.getElementById("hTitle").value.trim();
+      const desc = document.getElementById("hDesc").value.trim() || "Apex Heritage archival record.";
+      const file = document.getElementById("hFile").files[0];
+      if (!title && !file) { alert("Enter a title or select an image."); return; }
+
+      const save = (imgUrl) => {
+        savedArchives.unshift({ id: "ha-" + Date.now(), title: title || "Archival Document", desc, img: imgUrl, custom: true });
+        localStorage.setItem("apex_her_items_v1", JSON.stringify(savedArchives));
+        document.getElementById("hTitle").value = "";
+        document.getElementById("hDesc").value = "";
+        document.getElementById("hFile").value = "";
+        renderArchives();
+      };
+
+      if (file) {
+        const r = new FileReader();
+        r.onload = e => save(e.target.result);
+        r.readAsDataURL(file);
+      } else {
+        save("");
+      }
+    }
+
+    function deleteArchive(id) {
+      if (!isOwner) return;
+      savedArchives = savedArchives.filter(x => x.id !== id);
+      localStorage.setItem("apex_her_items_v1", JSON.stringify(savedArchives));
+      renderArchives();
+    }
+
+    function sendHeritageEmail(e) {
+      e.preventDefault();
+      const n = document.getElementById("gName").value;
+      const s = document.getElementById("gSurnames").value;
+      const notes = document.getElementById("gNotes").value;
+      window.location.href = `mailto:cbdenterprises2026@gmail.com?subject=${encodeURIComponent(`Apex Heritage Research Enquiry — ${s} (${n})`)}&body=${encodeURIComponent(`From: ${n}\nSurnames/Regions: ${s}\n\n${notes}`)}`;
+    }
+
+    renderArchives();
+    syncOwner();
+  </script>
+</body>
+</html>
 
